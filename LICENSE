@@ -1,0 +1,13 @@
+This software contains or makes use of software under the following licenses:
+
+=== The Apache Software License, Version 2.0 (https://www.apache.org/licenses/LICENSE-2.0) ===
+FindBugs-jsr305, Gson, Guava, javatuples
+
+=== GNU Lesser General Public License, Version 3 (https://www.gnu.org/licenses/lgpl-3.0) ===
+CraftBukkit
+
+=== MIT License (http://opensource.org/licenses/MIT) ===
+Project Lombok
+
+=== Mozilla Public License, Version 2.0 (https://www.mozilla.org/MPL/2.0/) ===
+PlayerHeads

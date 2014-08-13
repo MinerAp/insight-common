@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>insight-parent</artifactId>
+		<groupId>com.amshulman</groupId>
+		<version>dev-SNAPSHOT</version>
+	</parent>
+
+	<groupId>com.amshulman</groupId>
+	<artifactId>insight-common</artifactId>
+	<name>Insight Common</name>
+
+	<scm>
+		<connection>scm:git:https://github.com/MinerAp/insight-common.git</connection>
+		<developerConnection>scm:git:git@github.com:MinerAp/insight-common.git</developerConnection>
+		<url>https://github.com/MinerAp/insight-common</url>
+	</scm>
+
+	<issueManagement>
+		<system>github</system>
+		<url>https://github.com/MinerAp/insight-parent/issues</url>
+	</issueManagement>
+
+	<ciManagement>
+		<system>jenkins</system>
+		<url>https://build.minerap.com/view/Insight/job/insight-common/</url>
+	</ciManagement>
+
+	<distributionManagement>
+		<repository>
+			<id>minerap-release</id>
+			<url>http://repo.minerap.com/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>minerap-snapshot</id>
+			<url>http://repo.minerap.com/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<properties>
+		<playerheads.version>3.8</playerheads.version>
+	</properties>
+
+	<dependencies>
+		<!-- Insight libraries -->
+		<dependency>
+			<groupId>com.amshulman</groupId>
+			<artifactId>insight-api</artifactId>
+		</dependency>
+
+		<!-- javatuples -->
+		<dependency>
+			<groupId>org.javatuples</groupId>
+			<artifactId>javatuples</artifactId>
+		</dependency>
+
+		<!-- Gson -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
+
+		<!-- PlayerHeads -->
+		<dependency>
+			<groupId>org.shininet.bukkit</groupId>
+			<artifactId>PlayerHeads</artifactId>
+			<version>${playerheads.version}</version>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- Bukkit -->
+		<dependency>
+			<groupId>org.spigotmc</groupId>
+			<artifactId>spigot-api</artifactId>
+		</dependency>
+	</dependencies>
+	
+	<repositories>
+		<repository>
+			<id>minerap-repo</id>
+			<name>MinerAp</name>
+			<url>http://repo.minerap.com/content/groups/public/</url>
+		</repository>
+	</repositories>
+</project>
