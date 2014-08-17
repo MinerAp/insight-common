@@ -7,6 +7,8 @@ import com.amshulman.insight.row.RowEntry;
 public interface WriteBackend extends AutoCloseable {
 
     public abstract void registerPlayer(String playerName, UUID uuid);
+    
+    public abstract void registerWorld(String worldName);
 
     public abstract void submit(RowEntry data);
 
