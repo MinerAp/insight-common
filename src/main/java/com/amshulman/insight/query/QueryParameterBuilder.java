@@ -150,9 +150,10 @@ public class QueryParameterBuilder {
         return this;
     }
 
-    public QueryParameterBuilder setArea(int minX, int maxX, int minY, int maxY, int minZ, int maxZ) {
+    public QueryParameterBuilder setArea(String world, int minX, int maxX, int minY, int maxY, int minZ, int maxZ) {
         assert (!built);
         assert (!locationSet);
+        assert (worlds.isEmpty());
 
         assert (maxX > minX);
         assert (maxY > minY);
@@ -161,6 +162,7 @@ public class QueryParameterBuilder {
         radius = QueryParameters.WORLDEDIT;
         point = null;
 
+        addWorld(world);
         this.minX = minX;
         this.maxX = maxX;
         this.minY = minY;
