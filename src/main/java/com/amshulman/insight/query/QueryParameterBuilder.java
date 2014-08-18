@@ -155,9 +155,9 @@ public class QueryParameterBuilder {
         assert (!locationSet);
         assert (worlds.isEmpty());
 
-        assert (maxX > minX);
-        assert (maxY > minY);
-        assert (maxZ > minZ);
+        assert (maxX >= minX);
+        assert (maxY >= minY);
+        assert (maxZ >= minZ);
 
         radius = QueryParameters.WORLDEDIT;
         point = null;
