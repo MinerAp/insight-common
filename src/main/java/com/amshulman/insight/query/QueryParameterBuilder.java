@@ -128,10 +128,12 @@ public class QueryParameterBuilder {
         assert (!built);
         assert (!locationSet);
 
-        if (worlds.size() > 1 || (worlds.size() == 1 && !loc.getWorld().getName().equals(worlds.iterator().next()))) {
-            throw new IllegalStateException("You may not specify both the world and location in another world");
-        } else if (loc != null) {
+        if (loc != null) {
             worlds.add(loc.getWorld().getName());
+        }
+
+        if (worlds.size() > 1) {
+            throw new IllegalStateException("You may not query a specific area in multiple worlds");
         }
 
         this.radius = radius;
