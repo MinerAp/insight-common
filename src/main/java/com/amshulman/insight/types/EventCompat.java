@@ -46,6 +46,9 @@ public class EventCompat {
     /* Entity Actions */
     public static final EntityAction ENTITY_DEATH = createEntityAction("ENTITY_DEATH", "died", null);
     public static final EntityAction ENTITY_KILL = createEntityAction("ENTITY_KILL", "killed", null);
+    
+    public static final EntityAction VEHICLE_ENTER = createEntityAction("VEHICLE_ENTER", "entered", RollbackAction.NOTHING);
+    public static final EntityAction VEHICLE_EXIT = createEntityAction("VEHICLE_EXIT", "exited", RollbackAction.NOTHING);
 
     /* Item Actions */
     public static final ItemAction ITEM_INSERT = createItemAction("ITEM_INSERT", "inserted", RollbackAction.CONTAINER_WITHDRAW);
