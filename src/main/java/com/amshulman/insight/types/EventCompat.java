@@ -47,6 +47,9 @@ public class EventCompat {
     public static final EntityAction ENTITY_DEATH = createEntityAction("ENTITY_DEATH", "died", null);
     public static final EntityAction ENTITY_KILL = createEntityAction("ENTITY_KILL", "killed", null);
 
+    public static final EntityAction HANGING_PLACE = createEntityAction("HANGING_PLACE", "placed", null);
+    public static final EntityAction HANGING_BREAK = createEntityAction("HANGING_BREAK", "broke", null);
+
     public static final EntityAction EXP_GAIN = createEntityAction("EXP_GAIN", "picked up", RollbackAction.NOTHING);
 
     public static final EntityAction VEHICLE_ENTER = createEntityAction("VEHICLE_ENTER", "entered", RollbackAction.NOTHING);
@@ -69,8 +72,8 @@ public class EventCompat {
     //
 
     static {
-        add("PLACE", BLOCK_PLACE, BUCKET_PLACE);
-        add("BREAK", BLOCK_BREAK, BUCKET_REMOVE, BLOCK_BURN, BLOCK_EXPLODE);
+        add("PLACE", BLOCK_PLACE, BUCKET_PLACE, HANGING_PLACE);
+        add("BREAK", BLOCK_BREAK, BUCKET_REMOVE, BLOCK_BURN, BLOCK_EXPLODE, HANGING_BREAK);
         add("CHANGE", BLOCK_MELT, BLOCK_FORM, BLOCK_GROW, BLOCK_DIE, BLOCK_DROP, ENTITY_EAT);
         add("SPREAD", FIRE_SPREAD, BLOCK_IGNITE);
 
