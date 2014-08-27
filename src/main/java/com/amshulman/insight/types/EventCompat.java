@@ -68,6 +68,8 @@ public class EventCompat {
     public static final ItemAction ITEM_PICKUP = createItemAction("ITEM_PICKUP", "picked up", RollbackAction.NOTHING);
     public static final ItemAction ITEM_BURN = createItemAction("ITEM_BURN", "burned", RollbackAction.NOTHING);
 
+    public static final ItemAction ITEM_ROTATE = createItemAction("ITEM_ROTATE", "rotated", RollbackAction.NOTHING);
+
     /* Intransitive Actions */
     //
 
