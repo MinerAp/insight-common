@@ -1,10 +1,8 @@
 package com.amshulman.insight.types;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
 
 import com.amshulman.insight.action.BlockAction;
 import com.amshulman.insight.action.EntityAction;
@@ -15,11 +13,13 @@ import com.amshulman.insight.action.impl.BlockActionImpl;
 import com.amshulman.insight.action.impl.EntityActionImpl;
 import com.amshulman.insight.action.impl.ItemActionImpl;
 import com.google.common.base.Predicate;
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Multimap;
 
 public class EventCompat {
 
-    private static Map<String, Collection<InsightAction>> actionAliases = new HashMap<>();
+    private static Multimap<String, InsightAction> actionAliases = HashMultimap.create();
 
     /* Block Actions */
     public static final BlockAction BLOCK_PLACE = createBlockAction("BLOCK_PLACE", "placed", RollbackAction.BLOCK_REMOVE);
@@ -101,8 +101,8 @@ public class EventCompat {
         return Iterables.find(actions, new Predicate<InsightAction>() {
 
             @Override
-            public boolean apply(InsightAction arg0) {
-                return arg0.getName().equalsIgnoreCase(actionName);
+            public boolean apply(InsightAction action) {
+                return action.getName().equalsIgnoreCase(actionName);
             }
         }, null);
     }
@@ -126,13 +126,7 @@ public class EventCompat {
     }
 
     private static void add(String alias, InsightAction... actions) {
-        Collection<InsightAction> groupedActions = actionAliases.get(alias);
-        if (groupedActions == null) {
-            groupedActions = new HashSet<>();
-            actionAliases.put(alias, groupedActions);
-        }
-
-        Collections.addAll(groupedActions, actions);
+        actionAliases.putAll(alias, Arrays.asList(actions));
     }
 
     private static void add(InsightAction action) {
