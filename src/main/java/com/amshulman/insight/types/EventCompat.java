@@ -51,6 +51,7 @@ public class EventCompat {
     public static final EntityAction HANGING_BREAK = createEntityAction("HANGING_BREAK", "broke", null);
 
     public static final EntityAction EXP_GAIN = createEntityAction("EXP_GAIN", "picked up", RollbackAction.NOTHING);
+    public static final EntityAction SHEEP_DYE = createEntityAction("SHEEP_DYE", "dyed", RollbackAction.NOTHING);
 
     public static final EntityAction VEHICLE_ENTER = createEntityAction("VEHICLE_ENTER", "entered", RollbackAction.NOTHING);
     public static final EntityAction VEHICLE_EXIT = createEntityAction("VEHICLE_EXIT", "exited", RollbackAction.NOTHING);
