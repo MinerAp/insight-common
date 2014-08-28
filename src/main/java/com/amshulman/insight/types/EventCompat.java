@@ -35,7 +35,7 @@ public class EventCompat {
     public static final BlockAction BLOCK_GROW = createBlockAction("BLOCK_GROW", "grew", null);
     public static final BlockAction BLOCK_DIE = createBlockAction("BLOCK_DIE", "killed", RollbackAction.BLOCK_PLACE);
     public static final BlockAction BLOCK_DROP = createBlockAction("BLOCK_DROP", "dropped", null);
-    public static final BlockAction ENTITY_EAT = createBlockAction("ENTITY_EAT", "ate", RollbackAction.BLOCK_PLACE);
+    public static final BlockAction SHEEP_EAT = createBlockAction("SHEEP_EAT", "ate", RollbackAction.BLOCK_PLACE);
 
     public static final BlockAction BLOCK_IGNITE = createBlockAction("BLOCK_IGNITE", "created", null);
     public static final BlockAction FIRE_SPREAD = createBlockAction("FIRE_SPREAD", "spread", null);
@@ -52,6 +52,7 @@ public class EventCompat {
 
     public static final EntityAction EXP_GAIN = createEntityAction("EXP_GAIN", "picked up", RollbackAction.NOTHING);
     public static final EntityAction SHEEP_DYE = createEntityAction("SHEEP_DYE", "dyed", RollbackAction.NOTHING);
+    public static final EntityAction SHEEP_SHEAR = createEntityAction("SHEEP_SHEAR", "sheared", RollbackAction.NOTHING);
 
     public static final EntityAction VEHICLE_ENTER = createEntityAction("VEHICLE_ENTER", "entered", RollbackAction.NOTHING);
     public static final EntityAction VEHICLE_EXIT = createEntityAction("VEHICLE_EXIT", "exited", RollbackAction.NOTHING);
@@ -77,7 +78,7 @@ public class EventCompat {
     static {
         add("PLACE", BLOCK_PLACE, BUCKET_PLACE, HANGING_PLACE);
         add("BREAK", BLOCK_BREAK, BUCKET_REMOVE, BLOCK_BURN, BLOCK_EXPLODE, HANGING_BREAK);
-        add("CHANGE", BLOCK_MELT, BLOCK_FORM, BLOCK_GROW, BLOCK_DIE, BLOCK_DROP, ENTITY_EAT);
+        add("CHANGE", BLOCK_MELT, BLOCK_FORM, BLOCK_GROW, BLOCK_DIE, BLOCK_DROP, SHEEP_EAT);
         add("SPREAD", FIRE_SPREAD, BLOCK_IGNITE);
 
         add("INSERT", ITEM_INSERT);
