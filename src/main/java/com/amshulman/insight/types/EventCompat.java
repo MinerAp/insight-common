@@ -88,17 +88,12 @@ public class EventCompat {
     }
 
     public static Collection<InsightAction> getQueryActions(String actionName) {
-        Collection<InsightAction> actions = actionAliases.get(actionName.toUpperCase());
-        if (actions == null) {
-            return null;
-        }
-
-        return Collections.unmodifiableCollection(actions);
+        return Collections.unmodifiableCollection(actionAliases.get(actionName.toUpperCase()));
     }
 
     public static InsightAction getActionByName(final String actionName) {
         Collection<InsightAction> actions = actionAliases.get(actionName.toUpperCase());
-        if (actions == null) {
+        if (actions.isEmpty()) {
             return new UnknownAction();
         }
 
