@@ -24,11 +24,13 @@ public class EventCompat {
     /* Block Actions */
     public static final BlockAction BLOCK_PLACE = createBlockAction("BLOCK_PLACE", "placed", RollbackAction.BLOCK_REMOVE);
     public static final BlockAction BUCKET_PLACE = createBlockAction("BUCKET_PLACE", "placed", RollbackAction.BLOCK_REMOVE);
+    public static final BlockAction ENDERMAN_PLACE = createBlockAction("ENDERMAN_PLACE", "placed", RollbackAction.BLOCK_REMOVE);
 
     public static final BlockAction BLOCK_BREAK = createBlockAction("BLOCK_BREAK", "broke", RollbackAction.BLOCK_PLACE);
     public static final BlockAction BUCKET_REMOVE = createBlockAction("BUCKET_REMOVE", "removed", RollbackAction.BLOCK_PLACE);
     public static final BlockAction BLOCK_BURN = createBlockAction("BLOCK_BURN", "burned", RollbackAction.BLOCK_PLACE);
     public static final BlockAction BLOCK_EXPLODE = createBlockAction("BLOCK_EXPLODE", "blew up", RollbackAction.BLOCK_PLACE);
+    public static final BlockAction ENDERMAN_REMOVE = createBlockAction("ENDERMAN_REMOVE", "removed", RollbackAction.BLOCK_PLACE);
 
     public static final BlockAction BLOCK_MELT = createBlockAction("BLOCK_MELT", "melted", RollbackAction.BLOCK_PLACE);
     public static final BlockAction BLOCK_FORM = createBlockAction("BLOCK_FORM", "formed", RollbackAction.BLOCK_REMOVE);
@@ -76,8 +78,8 @@ public class EventCompat {
     //
 
     static {
-        add("PLACE", BLOCK_PLACE, BUCKET_PLACE, HANGING_PLACE);
-        add("BREAK", BLOCK_BREAK, BUCKET_REMOVE, BLOCK_BURN, BLOCK_EXPLODE, HANGING_BREAK);
+        add("PLACE", BLOCK_PLACE, BUCKET_PLACE, ENDERMAN_PLACE, HANGING_PLACE);
+        add("BREAK", BLOCK_BREAK, BUCKET_REMOVE, BLOCK_BURN, BLOCK_EXPLODE, ENDERMAN_REMOVE, HANGING_BREAK);
         add("CHANGE", BLOCK_MELT, BLOCK_FORM, BLOCK_GROW, BLOCK_DIE, BLOCK_DROP, SHEEP_EAT);
         add("SPREAD", FIRE_SPREAD, BLOCK_IGNITE);
 
