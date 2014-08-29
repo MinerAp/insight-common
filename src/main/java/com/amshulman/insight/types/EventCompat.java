@@ -38,6 +38,9 @@ public class EventCompat {
     public static final BlockAction BLOCK_DIE = createBlockAction("BLOCK_DIE", "killed", RollbackAction.BLOCK_PLACE);
     public static final BlockAction BLOCK_DROP = createBlockAction("BLOCK_DROP", "dropped", null);
     public static final BlockAction SHEEP_EAT = createBlockAction("SHEEP_EAT", "ate", RollbackAction.BLOCK_PLACE);
+    public static final BlockAction SOIL_TILL = createBlockAction("SOIL_TILL", "tilled", RollbackAction.BLOCK_PLACE);
+    public static final BlockAction SOIL_TRAMPLE = createBlockAction("SOIL_TRAMPLE", "trampled", RollbackAction.BLOCK_PLACE);
+    public static final BlockAction SOIL_REVERT = createBlockAction("SOIL_TILL", "deteriorated", RollbackAction.BLOCK_PLACE);
 
     public static final BlockAction BLOCK_IGNITE = createBlockAction("BLOCK_IGNITE", "created", null);
     public static final BlockAction FIRE_SPREAD = createBlockAction("FIRE_SPREAD", "spread", null);
