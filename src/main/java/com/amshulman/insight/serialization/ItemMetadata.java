@@ -11,4 +11,5 @@ public class ItemMetadata implements StorageMetadata {
 
     ItemMeta meta;
     int quantity;
+    short damage;
 }
