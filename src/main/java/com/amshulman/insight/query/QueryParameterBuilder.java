@@ -4,9 +4,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.bukkit.Location;
-
 import com.amshulman.insight.action.InsightAction;
+import com.amshulman.insight.types.InsightLocation;
 import com.amshulman.insight.types.InsightMaterial;
 import com.google.common.base.CharMatcher;
 
@@ -32,7 +31,7 @@ public class QueryParameterBuilder {
     private int minZ = 0;
     private int maxZ = 0;
     private int radius = 0;
-    private Location point = null;
+    private InsightLocation point = null;
 
     private Date after;
     private Date before;
@@ -60,7 +59,7 @@ public class QueryParameterBuilder {
             throw new IllegalArgumentException(world + " contains unacceptable special characters");
         }
 
-        if (point != null && !point.getWorld().getName().equals(world)) {
+        if (point != null && !point.getWorld().equals(world)) {
             throw new IllegalStateException("You may not specify both the world and location in another world");
         }
 
@@ -124,12 +123,12 @@ public class QueryParameterBuilder {
         return this;
     }
 
-    public QueryParameterBuilder setArea(Location loc, int radius) {
+    public QueryParameterBuilder setArea(InsightLocation loc, int radius) {
         assert (!built);
         assert (!locationSet);
 
         if (loc != null) {
-            worlds.add(loc.getWorld().getName());
+            worlds.add(loc.getWorld());
         }
 
         if (worlds.size() > 1) {
@@ -140,12 +139,12 @@ public class QueryParameterBuilder {
         point = loc;
 
         if (loc != null) {
-            minX = loc.getBlockX() - radius;
-            maxX = loc.getBlockX() + radius;
-            minY = loc.getBlockY() - radius;
-            maxY = loc.getBlockY() + radius;
-            minZ = loc.getBlockZ() - radius;
-            maxZ = loc.getBlockZ() + radius;
+            minX = loc.getX() - radius;
+            maxX = loc.getX() + radius;
+            minY = loc.getY() - radius;
+            maxY = loc.getY() + radius;
+            minZ = loc.getZ() - radius;
+            maxZ = loc.getZ() + radius;
         }
 
         locationSet = true;

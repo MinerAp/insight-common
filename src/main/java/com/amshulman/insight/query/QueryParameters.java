@@ -5,9 +5,8 @@ import java.util.Set;
 
 import lombok.Value;
 
-import org.bukkit.Location;
-
 import com.amshulman.insight.action.InsightAction;
+import com.amshulman.insight.types.InsightLocation;
 import com.amshulman.insight.types.InsightMaterial;
 
 @Value
@@ -35,7 +34,7 @@ public class QueryParameters {
     int minZ;
     int maxZ;
     int radius;
-    Location point;
+    InsightLocation point;
 
     Date after;
     Date before;
