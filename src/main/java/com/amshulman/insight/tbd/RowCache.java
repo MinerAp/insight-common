@@ -13,7 +13,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import com.amshulman.insight.row.RowEntry;
-import com.google.common.collect.Iterators;
 
 @EqualsAndHashCode(of = { "cacheId" })
 public final class RowCache implements Iterable<RowEntry> {
@@ -64,6 +63,24 @@ public final class RowCache implements Iterable<RowEntry> {
 
     @Override
     public Iterator<RowEntry> iterator() {
-        return Iterators.forArray(cache);
+        return new Iterator<RowEntry>() {
+
+            private int index = -1;
+
+            @Override
+            public boolean hasNext() {
+                return index + 1 < counter;
+            }
+
+            @Override
+            public RowEntry next() throws ArrayIndexOutOfBoundsException {
+                return cache[++index];
+            }
+
+            @Override
+            public void remove() throws ArrayIndexOutOfBoundsException {
+                cache[index] = null;
+            }
+        };
     }
 }
