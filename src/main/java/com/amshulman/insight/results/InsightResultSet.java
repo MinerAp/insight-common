@@ -11,20 +11,21 @@ import lombok.RequiredArgsConstructor;
 import com.amshulman.insight.action.BlockAction;
 import com.amshulman.insight.action.ItemAction;
 import com.amshulman.insight.query.QueryParameters;
+import com.amshulman.insight.types.InsightLocation;
 
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
-public abstract class InsightResultSet implements Iterable<InsightRecord> {
+public abstract class InsightResultSet implements Iterable<InsightRecord<?>> {
 
-    private InsightRecord previous = null;
-    private final List<InsightRecord> records;
+    private InsightRecord<?> previous = null;
+    private final List<InsightRecord<?>> records;
     @Getter private final QueryParameters queryParameters;
 
     protected InsightResultSet(QueryParameters params) {
-        records = new ArrayList<InsightRecord>();
+        records = new ArrayList<InsightRecord<?>>();
         queryParameters = params;
     }
 
-    protected final void add(InsightRecord r) {
+    protected final void add(InsightRecord<?> r) {
         if (previous != null && areSimultaneous(previous, r) && (areDuplicateItemActions(previous, r) || areDuplicateBlockActions(previous, r))) {
             previous = null;
         } else {
@@ -37,13 +38,13 @@ public abstract class InsightResultSet implements Iterable<InsightRecord> {
         previous = null;
     }
 
-    public InsightRecord getRecord(int index) {
+    public InsightRecord<?> getRecord(int index) {
         return records.get(index);
     }
 
     public abstract InsightResultSet getResultSubset(int fromIndex, int toIndex);
 
-    protected final List<InsightRecord> getSubList(int fromIndex, int toIndex) {
+    protected final List<InsightRecord<?>> getSubList(int fromIndex, int toIndex) {
         return records.subList(fromIndex, toIndex);
     }
 
@@ -51,11 +52,11 @@ public abstract class InsightResultSet implements Iterable<InsightRecord> {
         return records.size();
     }
 
-    public Iterator<InsightRecord> iterator() {
+    public Iterator<InsightRecord<?>> iterator() {
         return records.iterator();
     }
 
-    private static boolean areDuplicateItemActions(InsightRecord first, InsightRecord second) {
+    private static boolean areDuplicateItemActions(InsightRecord<?> first, InsightRecord<?> second) {
         if (!(first.getAction() instanceof ItemAction)) {
             return false;
         }
@@ -68,10 +69,10 @@ public abstract class InsightResultSet implements Iterable<InsightRecord> {
             return false;
         }
 
-        return areAdjacent(first, second);
+        return areAdjacent(first.getLocation(), second.getLocation());
     }
 
-    private static boolean areDuplicateBlockActions(InsightRecord first, InsightRecord second) {
+    private static boolean areDuplicateBlockActions(InsightRecord<?> first, InsightRecord<?> second) {
         if (!(first.getAction() instanceof BlockAction)) {
             return false;
         }
@@ -81,10 +82,10 @@ public abstract class InsightResultSet implements Iterable<InsightRecord> {
             return false;
         }
 
-        return areStacked(first, second);
+        return areStacked(first.getLocation(), second.getLocation());
     }
 
-    private static boolean areSimultaneous(InsightRecord first, InsightRecord second) {
+    private static boolean areSimultaneous(InsightRecord<?> first, InsightRecord<?> second) {
         if (!first.getDatetime().equals(second.getDatetime())) {
             return false;
         }
@@ -100,7 +101,7 @@ public abstract class InsightResultSet implements Iterable<InsightRecord> {
         return true;
     }
 
-    private static boolean areAdjacent(InsightRecord first, InsightRecord second) {
+    private static boolean areAdjacent(InsightLocation first, InsightLocation second) {
         if (first.getY() != second.getY()) {
             return false;
         }
@@ -124,7 +125,7 @@ public abstract class InsightResultSet implements Iterable<InsightRecord> {
         return false;
     }
 
-    private static boolean areStacked(InsightRecord first, InsightRecord second) {
+    private static boolean areStacked(InsightLocation first, InsightLocation second) {
         if (first.getX() != second.getX() || first.getZ() != second.getZ()) {
             return false;
         }
