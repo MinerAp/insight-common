@@ -20,7 +20,7 @@ public class QueryParameters {
     Set<String> actees;
     Set<InsightMaterial> materials;
 
-    boolean reverseOrder;
+    boolean orderReversed;
     boolean invertActors;
     boolean invertActions;
     boolean invertActees;

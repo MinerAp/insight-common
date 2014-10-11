@@ -23,6 +23,7 @@ public class QueryParameterBuilder {
     private boolean invertActees = false;
     private boolean invertMaterials = false;
     private boolean locationSet = false;
+    private boolean orderSet = false;
 
     private int minX = 0;
     private int maxX = 0;
@@ -45,10 +46,12 @@ public class QueryParameterBuilder {
         return new QueryParameters(worlds, actors, actions, actees, materials, reverseOrder, invertActors, invertActions, invertActees, invertMaterials, locationSet, minX, maxX, minY, maxY, minZ, maxZ, radius, point, after, before);
     }
 
-    public QueryParameterBuilder reverseOrder() {
+    public QueryParameterBuilder reverseOrder(boolean reversed) {
         assert (!built);
+        assert (!orderSet);
 
-        reverseOrder = true;
+        orderSet = true;
+        reverseOrder = reversed;
         return this;
     }
 
