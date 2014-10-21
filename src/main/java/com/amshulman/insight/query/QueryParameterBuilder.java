@@ -23,7 +23,6 @@ public class QueryParameterBuilder {
     private boolean invertActees = false;
     private boolean invertMaterials = false;
     private boolean locationSet = false;
-    private boolean orderSet = false;
 
     private int minX = 0;
     private int maxX = 0;
@@ -48,9 +47,7 @@ public class QueryParameterBuilder {
 
     public QueryParameterBuilder reverseOrder(boolean reversed) {
         assert (!built);
-        assert (!orderSet);
 
-        orderSet = true;
         reverseOrder = reversed;
         return this;
     }
