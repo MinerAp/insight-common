@@ -51,6 +51,8 @@ public class EventCompat {
     public static final BlockAction BLOCK_FLOW = createBlockAction("BLOCK_FLOW", "flowed into", BlockActionImpl.PLACE); // Opposite of normal because water "removes" other blocks
     public static final BlockAction BLOCK_TELEPORT = createBlockAction("BLOCK_TELEPORT", "teleported", null); // TODO
 
+    public static final BlockAction SIGN_CHANGE = createBlockAction("SIGN_CHANGE", "wrote", BlockActionImpl.NOTHING);
+
     /* Entity Actions */
     public static final EntityAction ENTITY_DEATH = createEntityAction("ENTITY_DEATH", "died", null); // TODO
     public static final EntityAction ENTITY_KILL = createEntityAction("ENTITY_KILL", "killed", null); // TODO

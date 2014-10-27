@@ -12,4 +12,5 @@ public class BlockActionImpl extends AbstractAction implements BlockAction {
 
     public static final BlockRollbackAction PLACE = null;
     public static final BlockRollbackAction REMOVE = null;
+    public static final BlockRollbackAction NOTHING = null;
 }
