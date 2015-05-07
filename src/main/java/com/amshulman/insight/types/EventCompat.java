@@ -70,11 +70,11 @@ public class EventCompat {
     /* Item Actions */
     public static final ItemAction ITEM_INSERT = createItemAction("ITEM_INSERT", "inserted", ItemActionImpl.WITHDRAW);
     public static final ItemAction CRAFTING_INSERT = createItemAction("CRAFT_INSERT", "inserted", ItemActionImpl.NOTHING);
-    public static final ItemAction ENDERCHEST_INSERT = createItemAction("EC_INSERT", "inserted", ItemActionImpl.WITHDRAW);
+    public static final ItemAction ENDERCHEST_INSERT = createItemAction("EC_INSERT", "inserted", ItemActionImpl.NOTHING);
 
     public static final ItemAction ITEM_REMOVE = createItemAction("ITEM_REMOVE", "removed", ItemActionImpl.INSERT);
     public static final ItemAction CRAFTING_REMOVE = createItemAction("CRAFT_REMOVE", "removed", ItemActionImpl.NOTHING);
-    public static final ItemAction ENDERCHEST_REMOVE = createItemAction("EC_REMOVE", "removed", ItemActionImpl.INSERT);
+    public static final ItemAction ENDERCHEST_REMOVE = createItemAction("EC_REMOVE", "removed", ItemActionImpl.NOTHING);
 
     public static final ItemAction ITEM_DROP = createItemAction("ITEM_DROP", "dropped", ItemActionImpl.NOTHING);
     public static final ItemAction ITEM_PICKUP = createItemAction("ITEM_PICKUP", "picked up", ItemActionImpl.NOTHING);
