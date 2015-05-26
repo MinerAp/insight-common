@@ -1,12 +1,9 @@
 package com.amshulman.insight.types;
 
-import java.util.Collection;
-
 import com.amshulman.insight.action.BlockAction;
 import com.amshulman.insight.action.BlockAction.BlockRollbackAction;
 import com.amshulman.insight.action.EntityAction;
 import com.amshulman.insight.action.EntityAction.EntityRollbackAction;
-import com.amshulman.insight.action.InsightAction;
 import com.amshulman.insight.action.ItemAction;
 import com.amshulman.insight.action.ItemAction.ItemRollbackAction;
 import com.amshulman.insight.action.impl.BlockActionImpl;
@@ -86,14 +83,6 @@ public class EventCompat {
         EventRegistry.addActionsToAlias("REMOVE", ITEM_REMOVE);
         EventRegistry.addActionsToAlias("DROP", ITEM_DROP);
         EventRegistry.addActionsToAlias("PICKUP", ITEM_PICKUP);
-    }
-
-    public static Collection<InsightAction> getQueryActions(String actionName) {
-        return EventRegistry.getActionsByAlias(actionName);
-    }
-
-    public static InsightAction getActionByName(String actionName) {
-        return EventRegistry.getActionByName(actionName);
     }
 
     private static BlockAction createBlockAction(String name, String friendlyDescription, BlockRollbackAction rollbackAction) {
