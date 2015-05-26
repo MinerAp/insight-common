@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Value;
 
 import com.amshulman.insight.action.EntityAction;
+import com.amshulman.insight.results.InsightRecord;
 
 @Value
 @RequiredArgsConstructor
@@ -15,5 +16,11 @@ public class EntityActionImpl extends EntityAction {
     String friendlyDescription;
     EntityRollbackAction rollbackAction;
 
-    public static final EntityRollbackAction NOTHING = null;
+    public static final EntityRollbackAction NOTHING = new EntityRollbackAction() {
+
+        @Override
+        public boolean rollback(InsightRecord<EntityAction> record, boolean force) {
+            return true;
+        }
+    };
 }

@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Value;
 
 import com.amshulman.insight.action.ItemAction;
+import com.amshulman.insight.results.InsightRecord;
 
 @Value
 @RequiredArgsConstructor
@@ -15,7 +16,27 @@ public class ItemActionImpl extends ItemAction {
     String friendlyDescription;
     ItemRollbackAction rollbackAction;
 
-    public static final ItemRollbackAction INSERT = null;
-    public static final ItemRollbackAction WITHDRAW = null;
-    public static final ItemRollbackAction NOTHING = null;
+    public static final ItemRollbackAction INSERT = new ItemRollbackAction() {
+
+        @Override
+        public boolean rollback(InsightRecord<ItemAction> record, boolean force) {
+            return true;
+        }
+    };
+
+    public static final ItemRollbackAction WITHDRAW = new ItemRollbackAction() {
+
+        @Override
+        public boolean rollback(InsightRecord<ItemAction> record, boolean force) {
+            return true;
+        }
+    };
+
+    public static final ItemRollbackAction NOTHING = new ItemRollbackAction() {
+
+        @Override
+        public boolean rollback(InsightRecord<ItemAction> record, boolean force) {
+            return true;
+        }
+    };
 }

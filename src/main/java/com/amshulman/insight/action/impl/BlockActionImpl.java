@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Value;
 
 import com.amshulman.insight.action.BlockAction;
+import com.amshulman.insight.results.InsightRecord;
 
 @Value
 @RequiredArgsConstructor
@@ -15,7 +16,27 @@ public class BlockActionImpl extends BlockAction {
     String friendlyDescription;
     BlockRollbackAction rollbackAction;
 
-    public static final BlockRollbackAction PLACE = null;
-    public static final BlockRollbackAction REMOVE = null;
-    public static final BlockRollbackAction NOTHING = null;
+    public static final BlockRollbackAction PLACE = new BlockRollbackAction() {
+
+        @Override
+        public boolean rollback(InsightRecord<BlockAction> record, boolean force) {
+            return true;
+        }
+    };
+
+    public static final BlockRollbackAction REMOVE = new BlockRollbackAction() {
+
+        @Override
+        public boolean rollback(InsightRecord<BlockAction> record, boolean force) {
+            return true;
+        }
+    };
+
+    public static final BlockRollbackAction NOTHING = new BlockRollbackAction() {
+
+        @Override
+        public boolean rollback(InsightRecord<BlockAction> record, boolean force) {
+            return true;
+        }
+    };
 }
