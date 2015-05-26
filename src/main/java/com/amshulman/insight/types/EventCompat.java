@@ -1,8 +1,6 @@
 package com.amshulman.insight.types;
 
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 
 import com.amshulman.insight.action.BlockAction;
 import com.amshulman.insight.action.BlockAction.BlockRollbackAction;
@@ -14,15 +12,8 @@ import com.amshulman.insight.action.ItemAction.ItemRollbackAction;
 import com.amshulman.insight.action.impl.BlockActionImpl;
 import com.amshulman.insight.action.impl.EntityActionImpl;
 import com.amshulman.insight.action.impl.ItemActionImpl;
-import com.amshulman.insight.results.InsightRecord;
-import com.google.common.base.Predicate;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Multimap;
 
 public class EventCompat {
-
-    private static Multimap<String, InsightAction> actionAliases = HashMultimap.create();
 
     /* Block Actions */
     public static final BlockAction BLOCK_PLACE = createBlockAction("BLOCK_PLACE", "placed", BlockActionImpl.REMOVE);
@@ -86,83 +77,40 @@ public class EventCompat {
     //
 
     static {
-        add("PLACE", BLOCK_PLACE, BUCKET_PLACE, ENDERMAN_PLACE);
-        add("BREAK", BLOCK_BREAK, BUCKET_REMOVE, BLOCK_BURN, BLOCK_EXPLODE, ENDERMAN_REMOVE);
-        add("CHANGE", BLOCK_MELT, BLOCK_FORM, BLOCK_GROW, BLOCK_DIE, BLOCK_DROP, SHEEP_EAT);
-        add("SPREAD", FIRE_SPREAD, BLOCK_IGNITE);
+        EventRegistry.addActionsToAlias("PLACE", BLOCK_PLACE, BUCKET_PLACE, ENDERMAN_PLACE);
+        EventRegistry.addActionsToAlias("BREAK", BLOCK_BREAK, BUCKET_REMOVE, BLOCK_BURN, BLOCK_EXPLODE, ENDERMAN_REMOVE);
+        EventRegistry.addActionsToAlias("CHANGE", BLOCK_MELT, BLOCK_FORM, BLOCK_GROW, BLOCK_DIE, BLOCK_DROP, SHEEP_EAT);
+        EventRegistry.addActionsToAlias("SPREAD", FIRE_SPREAD, BLOCK_IGNITE);
 
-        add("INSERT", ITEM_INSERT);
-        add("REMOVE", ITEM_REMOVE);
-        add("DROP", ITEM_DROP);
-        add("PICKUP", ITEM_PICKUP);
+        EventRegistry.addActionsToAlias("INSERT", ITEM_INSERT);
+        EventRegistry.addActionsToAlias("REMOVE", ITEM_REMOVE);
+        EventRegistry.addActionsToAlias("DROP", ITEM_DROP);
+        EventRegistry.addActionsToAlias("PICKUP", ITEM_PICKUP);
     }
 
     public static Collection<InsightAction> getQueryActions(String actionName) {
-        return Collections.unmodifiableCollection(actionAliases.get(actionName.toUpperCase()));
+        return EventRegistry.getActionsByAlias(actionName);
     }
 
-    public static InsightAction getActionByName(final String actionName) {
-        Collection<InsightAction> actions = actionAliases.get(actionName.toUpperCase());
-        if (actions.isEmpty()) {
-            return new UnknownAction();
-        }
-
-        return Iterables.find(actions, new Predicate<InsightAction>() {
-
-            @Override
-            public boolean apply(InsightAction action) {
-                return action.getName().equalsIgnoreCase(actionName);
-            }
-        }, null);
+    public static InsightAction getActionByName(String actionName) {
+        return EventRegistry.getActionByName(actionName);
     }
 
     private static BlockAction createBlockAction(String name, String friendlyDescription, BlockRollbackAction rollbackAction) {
-        BlockActionImpl action = new BlockActionImpl(name, friendlyDescription, rollbackAction);
-        add(action);
+        BlockAction action = new BlockActionImpl(name, friendlyDescription, rollbackAction);
+        EventRegistry.addAction(action);
         return action;
     }
 
     private static EntityAction createEntityAction(String name, String friendlyDescription, EntityRollbackAction rollbackAction) {
-        EntityActionImpl action = new EntityActionImpl(name, friendlyDescription, rollbackAction);
-        add(action);
+        EntityAction action = new EntityActionImpl(name, friendlyDescription, rollbackAction);
+        EventRegistry.addAction(action);
         return action;
     }
 
     private static ItemAction createItemAction(String name, String friendlyDescription, ItemRollbackAction rollbackAction) {
-        ItemActionImpl action = new ItemActionImpl(name, friendlyDescription, rollbackAction);
-        add(action);
+        ItemAction action = new ItemActionImpl(name, friendlyDescription, rollbackAction);
+        EventRegistry.addAction(action);
         return action;
-    }
-
-    private static void add(String alias, InsightAction... actions) {
-        actionAliases.putAll(alias, Arrays.asList(actions));
-    }
-
-    private static void add(InsightAction action) {
-        add(action.getName(), action);
-    }
-
-    private static class UnknownAction extends InsightAction {
-
-        @Override
-        public String getName() {
-            return "UNKNOWN_ACTION";
-        }
-
-        @Override
-        public String getFriendlyDescription() {
-            return "did something to";
-        }
-
-        @Override
-        public RollbackAction<InsightAction> getRollbackAction() {
-            return new RollbackAction<InsightAction>() {
-
-                @Override
-                public boolean rollback(InsightRecord<InsightAction> rowEntry, boolean force) {
-                    return false;
-                }
-            };
-        }
     }
 }
