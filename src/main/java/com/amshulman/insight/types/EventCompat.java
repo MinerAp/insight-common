@@ -1,5 +1,8 @@
 package com.amshulman.insight.types;
 
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
+
 import com.amshulman.insight.action.BlockAction;
 import com.amshulman.insight.action.BlockAction.BlockRollbackAction;
 import com.amshulman.insight.action.EntityAction;
@@ -10,65 +13,66 @@ import com.amshulman.insight.action.impl.BlockActionImpl;
 import com.amshulman.insight.action.impl.EntityActionImpl;
 import com.amshulman.insight.action.impl.ItemActionImpl;
 
+@FieldDefaults(level = AccessLevel.PUBLIC, makeFinal = true)
 public class EventCompat {
 
     /* Block Actions */
-    public static final BlockAction BLOCK_PLACE = createBlockAction("BLOCK_PLACE", "placed", BlockActionImpl.REMOVE);
-    public static final BlockAction BUCKET_PLACE = createBlockAction("BUCKET_PLACE", "placed", BlockActionImpl.REMOVE);
-    public static final BlockAction ENDERMAN_PLACE = createBlockAction("ENDERMAN_PLACE", "placed", BlockActionImpl.REMOVE);
+    static BlockAction BLOCK_PLACE = createBlockAction("BLOCK_PLACE", "placed", BlockActionImpl.REMOVE);
+    static BlockAction BUCKET_PLACE = createBlockAction("BUCKET_PLACE", "placed", BlockActionImpl.REMOVE);
+    static BlockAction ENDERMAN_PLACE = createBlockAction("ENDERMAN_PLACE", "placed", BlockActionImpl.REMOVE);
 
-    public static final BlockAction BLOCK_BREAK = createBlockAction("BLOCK_BREAK", "broke", BlockActionImpl.PLACE);
-    public static final BlockAction BUCKET_REMOVE = createBlockAction("BUCKET_REMOVE", "removed", BlockActionImpl.PLACE);
-    public static final BlockAction BLOCK_BURN = createBlockAction("BLOCK_BURN", "burned", BlockActionImpl.PLACE);
-    public static final BlockAction BLOCK_EXPLODE = createBlockAction("BLOCK_EXPLODE", "blew up", BlockActionImpl.PLACE);
-    public static final BlockAction ENDERMAN_REMOVE = createBlockAction("ENDERMAN_REMOVE", "removed", BlockActionImpl.PLACE);
+    static BlockAction BLOCK_BREAK = createBlockAction("BLOCK_BREAK", "broke", BlockActionImpl.PLACE);
+    static BlockAction BUCKET_REMOVE = createBlockAction("BUCKET_REMOVE", "removed", BlockActionImpl.PLACE);
+    static BlockAction BLOCK_BURN = createBlockAction("BLOCK_BURN", "burned", BlockActionImpl.PLACE);
+    static BlockAction BLOCK_EXPLODE = createBlockAction("BLOCK_EXPLODE", "blew up", BlockActionImpl.PLACE);
+    static BlockAction ENDERMAN_REMOVE = createBlockAction("ENDERMAN_REMOVE", "removed", BlockActionImpl.PLACE);
 
-    public static final BlockAction BLOCK_MELT = createBlockAction("BLOCK_MELT", "melted", BlockActionImpl.PLACE);
-    public static final BlockAction BLOCK_FORM = createBlockAction("BLOCK_FORM", "formed", BlockActionImpl.REMOVE);
-    public static final BlockAction BLOCK_GROW = createBlockAction("BLOCK_GROW", "grew", BlockActionImpl.REMOVE);
-    public static final BlockAction BLOCK_DIE = createBlockAction("BLOCK_DIE", "killed", BlockActionImpl.PLACE);
-    public static final BlockAction BLOCK_DROP = createBlockAction("BLOCK_DROP", "dropped", null); // TODO
-    public static final BlockAction SHEEP_EAT = createBlockAction("SHEEP_EAT", "ate", BlockActionImpl.PLACE);
-    public static final BlockAction SOIL_TILL = createBlockAction("SOIL_TILL", "tilled", BlockActionImpl.PLACE);
-    public static final BlockAction SOIL_TRAMPLE = createBlockAction("SOIL_TRAMPLE", "trampled", BlockActionImpl.PLACE);
-    public static final BlockAction SOIL_REVERT = createBlockAction("SOIL_REVERT", "deteriorated", BlockActionImpl.PLACE);
+    static BlockAction BLOCK_MELT = createBlockAction("BLOCK_MELT", "melted", BlockActionImpl.PLACE);
+    static BlockAction BLOCK_FORM = createBlockAction("BLOCK_FORM", "formed", BlockActionImpl.REMOVE);
+    static BlockAction BLOCK_GROW = createBlockAction("BLOCK_GROW", "grew", BlockActionImpl.REMOVE);
+    static BlockAction BLOCK_DIE = createBlockAction("BLOCK_DIE", "killed", BlockActionImpl.PLACE);
+    static BlockAction BLOCK_DROP = createBlockAction("BLOCK_DROP", "dropped", null); // TODO
+    static BlockAction SHEEP_EAT = createBlockAction("SHEEP_EAT", "ate", BlockActionImpl.PLACE);
+    static BlockAction SOIL_TILL = createBlockAction("SOIL_TILL", "tilled", BlockActionImpl.PLACE);
+    static BlockAction SOIL_TRAMPLE = createBlockAction("SOIL_TRAMPLE", "trampled", BlockActionImpl.PLACE);
+    static BlockAction SOIL_REVERT = createBlockAction("SOIL_REVERT", "deteriorated", BlockActionImpl.PLACE);
 
-    public static final BlockAction BLOCK_IGNITE = createBlockAction("BLOCK_IGNITE", "created", BlockActionImpl.REMOVE);
-    public static final BlockAction FIRE_SPREAD = createBlockAction("FIRE_SPREAD", "spread", BlockActionImpl.REMOVE);
+    static BlockAction BLOCK_IGNITE = createBlockAction("BLOCK_IGNITE", "created", BlockActionImpl.REMOVE);
+    static BlockAction FIRE_SPREAD = createBlockAction("FIRE_SPREAD", "spread", BlockActionImpl.REMOVE);
 
-    public static final BlockAction BLOCK_FLOW = createBlockAction("BLOCK_FLOW", "flowed into", BlockActionImpl.PLACE); // Opposite of normal because water "removes" other blocks
-    public static final BlockAction BLOCK_TELEPORT = createBlockAction("BLOCK_TELEPORT", "teleported", null); // TODO
+    static BlockAction BLOCK_FLOW = createBlockAction("BLOCK_FLOW", "flowed into", BlockActionImpl.PLACE); // Opposite of normal because water "removes" other blocks
+    static BlockAction BLOCK_TELEPORT = createBlockAction("BLOCK_TELEPORT", "teleported", null); // TODO
 
-    public static final BlockAction SIGN_CHANGE = createBlockAction("SIGN_CHANGE", "wrote", BlockActionImpl.NOTHING);
+    static BlockAction SIGN_CHANGE = createBlockAction("SIGN_CHANGE", "wrote", BlockActionImpl.NOTHING);
 
     /* Entity Actions */
-    public static final EntityAction ENTITY_DEATH = createEntityAction("ENTITY_DEATH", "died", null); // TODO
-    public static final EntityAction ENTITY_KILL = createEntityAction("ENTITY_KILL", "killed", null); // TODO
+    static EntityAction ENTITY_DEATH = createEntityAction("ENTITY_DEATH", "died", null); // TODO
+    static EntityAction ENTITY_KILL = createEntityAction("ENTITY_KILL", "killed", null); // TODO
 
-    public static final EntityAction HANGING_PLACE = createEntityAction("HANGING_PLACE", "placed", null); // TODO
-    public static final EntityAction HANGING_BREAK = createEntityAction("HANGING_BREAK", "broke", null); // TODO
+    static EntityAction HANGING_PLACE = createEntityAction("HANGING_PLACE", "placed", null); // TODO
+    static EntityAction HANGING_BREAK = createEntityAction("HANGING_BREAK", "broke", null); // TODO
 
-    public static final EntityAction EXP_GAIN = createEntityAction("EXP_GAIN", "picked up", EntityActionImpl.NOTHING);
-    public static final EntityAction SHEEP_DYE = createEntityAction("SHEEP_DYE", "dyed", EntityActionImpl.NOTHING);
-    public static final EntityAction SHEEP_SHEAR = createEntityAction("SHEEP_SHEAR", "sheared", EntityActionImpl.NOTHING);
+    static EntityAction EXP_GAIN = createEntityAction("EXP_GAIN", "picked up", EntityActionImpl.NOTHING);
+    static EntityAction SHEEP_DYE = createEntityAction("SHEEP_DYE", "dyed", EntityActionImpl.NOTHING);
+    static EntityAction SHEEP_SHEAR = createEntityAction("SHEEP_SHEAR", "sheared", EntityActionImpl.NOTHING);
 
-    public static final EntityAction VEHICLE_ENTER = createEntityAction("VEHICLE_ENTER", "entered", EntityActionImpl.NOTHING);
-    public static final EntityAction VEHICLE_EXIT = createEntityAction("VEHICLE_EXIT", "exited", EntityActionImpl.NOTHING);
+    static EntityAction VEHICLE_ENTER = createEntityAction("VEHICLE_ENTER", "entered", EntityActionImpl.NOTHING);
+    static EntityAction VEHICLE_EXIT = createEntityAction("VEHICLE_EXIT", "exited", EntityActionImpl.NOTHING);
 
     /* Item Actions */
-    public static final ItemAction ITEM_INSERT = createItemAction("ITEM_INSERT", "inserted", ItemActionImpl.WITHDRAW);
-    public static final ItemAction CRAFTING_INSERT = createItemAction("CRAFT_INSERT", "inserted", ItemActionImpl.NOTHING);
-    public static final ItemAction ENDERCHEST_INSERT = createItemAction("EC_INSERT", "inserted", ItemActionImpl.NOTHING);
+    static ItemAction ITEM_INSERT = createItemAction("ITEM_INSERT", "inserted", ItemActionImpl.WITHDRAW);
+    static ItemAction CRAFTING_INSERT = createItemAction("CRAFT_INSERT", "inserted", ItemActionImpl.NOTHING);
+    static ItemAction ENDERCHEST_INSERT = createItemAction("EC_INSERT", "inserted", ItemActionImpl.NOTHING);
 
-    public static final ItemAction ITEM_REMOVE = createItemAction("ITEM_REMOVE", "removed", ItemActionImpl.INSERT);
-    public static final ItemAction CRAFTING_REMOVE = createItemAction("CRAFT_REMOVE", "removed", ItemActionImpl.NOTHING);
-    public static final ItemAction ENDERCHEST_REMOVE = createItemAction("EC_REMOVE", "removed", ItemActionImpl.NOTHING);
+    static ItemAction ITEM_REMOVE = createItemAction("ITEM_REMOVE", "removed", ItemActionImpl.INSERT);
+    static ItemAction CRAFTING_REMOVE = createItemAction("CRAFT_REMOVE", "removed", ItemActionImpl.NOTHING);
+    static ItemAction ENDERCHEST_REMOVE = createItemAction("EC_REMOVE", "removed", ItemActionImpl.NOTHING);
 
-    public static final ItemAction ITEM_DROP = createItemAction("ITEM_DROP", "dropped", ItemActionImpl.NOTHING);
-    public static final ItemAction ITEM_PICKUP = createItemAction("ITEM_PICKUP", "picked up", ItemActionImpl.NOTHING);
-    public static final ItemAction ITEM_BURN = createItemAction("ITEM_BURN", "burned", ItemActionImpl.NOTHING);
+    static ItemAction ITEM_DROP = createItemAction("ITEM_DROP", "dropped", ItemActionImpl.NOTHING);
+    static ItemAction ITEM_PICKUP = createItemAction("ITEM_PICKUP", "picked up", ItemActionImpl.NOTHING);
+    static ItemAction ITEM_BURN = createItemAction("ITEM_BURN", "burned", ItemActionImpl.NOTHING);
 
-    public static final ItemAction ITEM_ROTATE = createItemAction("ITEM_ROTATE", "rotated", ItemActionImpl.NOTHING);
+    static ItemAction ITEM_ROTATE = createItemAction("ITEM_ROTATE", "rotated", ItemActionImpl.NOTHING);
 
     /* Intransitive Actions */
     //
