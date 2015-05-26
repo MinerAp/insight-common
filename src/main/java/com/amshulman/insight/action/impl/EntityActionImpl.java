@@ -1,14 +1,19 @@
 package com.amshulman.insight.action.impl;
 
-import javax.annotation.Nonnull;
+import lombok.EqualsAndHashCode;
+import lombok.RequiredArgsConstructor;
+import lombok.Value;
 
 import com.amshulman.insight.action.EntityAction;
 
-public class EntityActionImpl extends AbstractAction implements EntityAction {
+@Value
+@RequiredArgsConstructor
+@EqualsAndHashCode(of = { "name" }, callSuper = false)
+public class EntityActionImpl extends EntityAction {
 
-    public EntityActionImpl(@Nonnull String name, @Nonnull String friendlyDescription, EntityRollbackAction rollbackAction) {
-        super(name, friendlyDescription, rollbackAction);
-    }
+    String name;
+    String friendlyDescription;
+    EntityRollbackAction rollbackAction;
 
     public static final EntityRollbackAction NOTHING = null;
 }

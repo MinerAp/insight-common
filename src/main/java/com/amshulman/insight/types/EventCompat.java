@@ -142,7 +142,7 @@ public class EventCompat {
         add(action.getName(), action);
     }
 
-    private static class UnknownAction implements InsightAction {
+    private static class UnknownAction extends InsightAction {
 
         @Override
         public String getName() {
