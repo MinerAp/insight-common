@@ -83,8 +83,8 @@ public class EventRegistry {
             throw new NullPointerException("action may not be null");
         }
 
-        if (!(action instanceof BlockAction) ||
-                !(action instanceof EntityAction) ||
+        if (!(action instanceof BlockAction) &&
+                !(action instanceof EntityAction) &&
                 !(action instanceof ItemAction)) {
             throw new IllegalArgumentException("action is not one of BlockAction, EntityAction, or ItemAction");
         }
