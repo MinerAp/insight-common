@@ -3,8 +3,6 @@ package com.amshulman.insight.types;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -14,14 +12,15 @@ import com.amshulman.insight.action.EntityAction;
 import com.amshulman.insight.action.InsightAction;
 import com.amshulman.insight.action.ItemAction;
 import com.amshulman.insight.results.InsightRecord;
+import com.google.common.base.Predicate;
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class EventRegistry {
 
-    static Map<String, InsightAction> actionsByName = new HashMap<>();
-    static Multimap<String, InsightAction> actionAliases = HashMultimap.create();
+    static Multimap<String, InsightAction> actionsByName = HashMultimap.create();
 
     /**
      * @param action
@@ -44,12 +43,20 @@ public class EventRegistry {
      * @return the action, or an <code>UnknownAction</code>
      */
     public static InsightAction getActionByName(String actionName) {
-        InsightAction action = actionsByName.get(actionName.toUpperCase());
-        if (action == null) {
+        Collection<InsightAction> actions = actionsByName.get(actionName.toUpperCase());
+        if (actions.size() == 0) {
             return new UnknownAction();
-        } else {
-            return action;
+        } else if (actions.size() == 1) {
+            return actions.iterator().next();
         }
+
+        return Iterables.find(actions, new Predicate<InsightAction>() {
+
+            @Override
+            public boolean apply(InsightAction action) {
+                return action.getName().equalsIgnoreCase(actionName);
+            }
+        }, null);
     }
 
     /**
@@ -67,7 +74,7 @@ public class EventRegistry {
             checkIsValid(action);
         }
 
-        actionAliases.putAll(alias.toUpperCase(), Arrays.asList(actions));
+        actionsByName.putAll(alias.toUpperCase(), Arrays.asList(actions));
     }
 
     /**
@@ -75,7 +82,7 @@ public class EventRegistry {
      * @return
      */
     public static Collection<InsightAction> getActionsByAlias(String alias) {
-        return Collections.unmodifiableCollection(actionAliases.get(alias.toUpperCase()));
+        return Collections.unmodifiableCollection(actionsByName.get(alias.toUpperCase()));
     }
 
     private static void checkIsValid(InsightAction action) {
