@@ -19,24 +19,24 @@ public class ItemActionImpl extends ItemAction {
     public static final ItemRollbackAction INSERT = new ItemRollbackAction() {
 
         @Override
-        public boolean rollback(InsightRecord<ItemAction> record, boolean force) {
-            return true;
+        public RollbackActionStatus rollback(InsightRecord<ItemAction> record, boolean force) {
+            return RollbackActionStatus.SKIPPED;
         }
     };
 
     public static final ItemRollbackAction WITHDRAW = new ItemRollbackAction() {
 
         @Override
-        public boolean rollback(InsightRecord<ItemAction> record, boolean force) {
-            return true;
+        public RollbackActionStatus rollback(InsightRecord<ItemAction> record, boolean force) {
+            return RollbackActionStatus.SKIPPED;
         }
     };
 
     public static final ItemRollbackAction NOTHING = new ItemRollbackAction() {
 
         @Override
-        public boolean rollback(InsightRecord<ItemAction> record, boolean force) {
-            return true;
+        public RollbackActionStatus rollback(InsightRecord<ItemAction> record, boolean force) {
+            return RollbackActionStatus.SKIPPED;
         }
     };
 }

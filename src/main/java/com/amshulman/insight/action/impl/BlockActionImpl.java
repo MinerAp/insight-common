@@ -19,24 +19,24 @@ public class BlockActionImpl extends BlockAction {
     public static final BlockRollbackAction PLACE = new BlockRollbackAction() {
 
         @Override
-        public boolean rollback(InsightRecord<BlockAction> record, boolean force) {
-            return true;
+        public RollbackActionStatus rollback(InsightRecord<BlockAction> record, boolean force) {
+            return RollbackActionStatus.SKIPPED;
         }
     };
 
     public static final BlockRollbackAction REMOVE = new BlockRollbackAction() {
 
         @Override
-        public boolean rollback(InsightRecord<BlockAction> record, boolean force) {
-            return true;
+        public RollbackActionStatus rollback(InsightRecord<BlockAction> record, boolean force) {
+            return RollbackActionStatus.SKIPPED;
         }
     };
 
     public static final BlockRollbackAction NOTHING = new BlockRollbackAction() {
 
         @Override
-        public boolean rollback(InsightRecord<BlockAction> record, boolean force) {
-            return true;
+        public RollbackActionStatus rollback(InsightRecord<BlockAction> record, boolean force) {
+            return RollbackActionStatus.SKIPPED;
         }
     };
 }

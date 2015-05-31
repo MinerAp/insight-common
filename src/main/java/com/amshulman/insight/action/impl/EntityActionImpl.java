@@ -19,8 +19,8 @@ public class EntityActionImpl extends EntityAction {
     public static final EntityRollbackAction NOTHING = new EntityRollbackAction() {
 
         @Override
-        public boolean rollback(InsightRecord<EntityAction> record, boolean force) {
-            return true;
+        public RollbackActionStatus rollback(InsightRecord<EntityAction> record, boolean force) {
+            return RollbackActionStatus.SKIPPED;
         }
     };
 }

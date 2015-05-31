@@ -113,8 +113,8 @@ public class EventRegistry {
             return new RollbackAction<InsightAction>() {
 
                 @Override
-                public boolean rollback(InsightRecord<InsightAction> rowEntry, boolean force) {
-                    return false;
+                public RollbackActionStatus rollback(InsightRecord<InsightAction> rowEntry, boolean force) {
+                    return RollbackActionStatus.NO_ACTION_AVAILABLE;
                 }
             };
         }
