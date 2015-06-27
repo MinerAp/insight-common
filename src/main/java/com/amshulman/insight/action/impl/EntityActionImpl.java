@@ -10,12 +10,15 @@ import com.amshulman.insight.results.InsightRecord;
 @Value
 @RequiredArgsConstructor
 @EqualsAndHashCode(of = { "name" }, callSuper = false)
-public class EntityActionImpl extends EntityAction {
+public final class EntityActionImpl extends EntityAction {
 
     String name;
     String friendlyDescription;
     EntityRollbackAction rollbackAction;
 
+    /**
+     * Do nothing
+     */
     public static final EntityRollbackAction NOTHING = new EntityRollbackAction() {
 
         @Override

@@ -10,12 +10,15 @@ import com.amshulman.insight.results.InsightRecord;
 @Value
 @RequiredArgsConstructor
 @EqualsAndHashCode(of = { "name" }, callSuper = false)
-public class BlockActionImpl extends BlockAction {
+public final class BlockActionImpl extends BlockAction {
 
     String name;
     String friendlyDescription;
     BlockRollbackAction rollbackAction;
 
+    /**
+     * Place the block described in the action
+     */
     public static final BlockRollbackAction PLACE = new BlockRollbackAction() {
 
         @Override
@@ -24,6 +27,9 @@ public class BlockActionImpl extends BlockAction {
         }
     };
 
+    /**
+     * Remove the block described in the action
+     */
     public static final BlockRollbackAction REMOVE = new BlockRollbackAction() {
 
         @Override
@@ -32,6 +38,9 @@ public class BlockActionImpl extends BlockAction {
         }
     };
 
+    /**
+     * Do nothing
+     */
     public static final BlockRollbackAction NOTHING = new BlockRollbackAction() {
 
         @Override

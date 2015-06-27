@@ -10,7 +10,7 @@ import com.amshulman.insight.types.InsightLocation;
 import com.amshulman.insight.types.InsightMaterial;
 
 @Value
-public class QueryParameters {
+public final class QueryParameters {
 
     public static final int WORLDEDIT = -1;
 

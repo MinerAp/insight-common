@@ -7,7 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.block.BlockState;
 import org.javatuples.Pair;
 
-public class MaterialCompat {
+public final class MaterialCompat {
 
     public static InsightMaterial getInsightMaterial(@Nonnull BlockState b) {
         return getInsightMaterial(b.getType(), b.getRawData());

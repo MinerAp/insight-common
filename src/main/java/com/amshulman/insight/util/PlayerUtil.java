@@ -7,12 +7,16 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.UUID;
 
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
+
 import com.google.common.base.CharMatcher;
 
-public class PlayerUtil {
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+public final class PlayerUtil {
 
-    private static final String USER_AGENT = "Insight";
-    private static final String SESSION_SERVER = "https://sessionserver.mojang.com/session/minecraft/profile/";
+    static String USER_AGENT = "Insight";
+    static String SESSION_SERVER = "https://sessionserver.mojang.com/session/minecraft/profile/";
 
     public static String getCurrentName(UUID uuid) {
         try {

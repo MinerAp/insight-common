@@ -4,39 +4,43 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
+
 import com.amshulman.insight.action.InsightAction;
 import com.amshulman.insight.types.InsightLocation;
 import com.amshulman.insight.types.InsightMaterial;
 import com.google.common.base.CharMatcher;
 
-public class QueryParameterBuilder {
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public final class QueryParameterBuilder {
 
-    private final Set<String> worlds = new HashSet<String>(5);
-    private final Set<String> actors = new HashSet<String>(10);
-    private final Set<InsightAction> actions = new HashSet<InsightAction>(10);
-    private final Set<String> actees = new HashSet<String>(10);
-    private final Set<InsightMaterial> materials = new HashSet<InsightMaterial>(10);
+    final Set<String> worlds = new HashSet<String>(5);
+    final Set<String> actors = new HashSet<String>(10);
+    final Set<InsightAction> actions = new HashSet<InsightAction>(10);
+    final Set<String> actees = new HashSet<String>(10);
+    final Set<InsightMaterial> materials = new HashSet<InsightMaterial>(10);
 
-    private boolean reverseOrder = false;
-    private boolean invertActors = false;
-    private boolean invertActions = false;
-    private boolean invertActees = false;
-    private boolean invertMaterials = false;
-    private boolean locationSet = false;
+    boolean reverseOrder = false;
+    boolean invertActors = false;
+    boolean invertActions = false;
+    boolean invertActees = false;
+    boolean invertMaterials = false;
+    boolean locationSet = false;
 
-    private int minX = 0;
-    private int maxX = 0;
-    private int minY = 0;
-    private int maxY = 0;
-    private int minZ = 0;
-    private int maxZ = 0;
-    private int radius = 0;
-    private InsightLocation point = null;
+    int minX = 0;
+    int maxX = 0;
+    int minY = 0;
+    int maxY = 0;
+    int minZ = 0;
+    int maxZ = 0;
+    int radius = 0;
+    InsightLocation point = null;
 
-    private Date after;
-    private Date before;
+    Date after;
+    Date before;
 
-    private boolean built = false;
+    boolean built = false;
 
     public QueryParameters build() {
         assert (!built);

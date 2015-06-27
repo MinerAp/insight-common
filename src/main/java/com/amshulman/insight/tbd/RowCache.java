@@ -9,22 +9,29 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.experimental.FieldDefaults;
+import lombok.experimental.NonFinal;
 
 import com.amshulman.insight.row.RowEntry;
 
+/**
+ * Batches rows to allow more efficient bulk database writes. The methods in this class are not thread-safe unless explicitly marked.
+ */
 @EqualsAndHashCode(of = { "cacheId" })
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public final class RowCache implements Iterable<RowEntry> {
 
-    private static Set<RowCache> dirtyCaches = Collections.newSetFromMap(new ConcurrentHashMap<RowCache, Boolean>());
-    private static int cacheCounter = 0;
+    static Set<RowCache> dirtyCaches = Collections.newSetFromMap(new ConcurrentHashMap<RowCache, Boolean>());
+    @NonFinal static int cacheCounter = 0;
 
-    @Getter private final int cacheId;
-    private final int size;
-    private final RowEntry[] cache;
+    @Getter int cacheId;
+    int size;
+    RowEntry[] cache;
 
-    private int counter = 0;
+    @NonFinal int counter = 0;
 
     public RowCache(@Nonnegative int size) {
         this.size = size;
@@ -36,27 +43,56 @@ public final class RowCache implements Iterable<RowEntry> {
         dirtyCaches.add(this);
     }
 
+    /**
+     * Adds a row to this cache
+     *
+     * @param e
+     *            The row to add
+     */
     public void add(@Nonnull RowEntry e) {
         cache[counter] = e;
         ++counter;
     }
 
+    /**
+     * Does this cache have any dirty data?
+     *
+     * @return true if this cache has any dirty data
+     */
     public boolean isDirty() {
         return counter != 0;
     }
 
+    /**
+     * Gets the number of rows in this cache
+     *
+     * @return The number of rows in this cache.
+     */
     public int getSize() {
         return counter;
     }
 
+    /**
+     * Checks if this cache can hold additional rows.
+     *
+     * @return true if this cache is full
+     */
     public boolean isFull() {
         return counter == size;
     }
 
+    /**
+     * Get all caches which still have dirty data. This method is thread-safe.
+     *
+     * @return A snapshot of which caches were dirty at the time this method was called.
+     */
     public static Set<RowCache> getDirtyCaches() {
         return new HashSet<RowCache>(dirtyCaches);
     }
 
+    /**
+     * Mark this cache as clean.
+     */
     public void markClean() {
         dirtyCaches.remove(this);
     }

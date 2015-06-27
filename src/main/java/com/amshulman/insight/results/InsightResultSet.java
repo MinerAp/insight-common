@@ -7,6 +7,8 @@ import java.util.List;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
+import lombok.experimental.NonFinal;
 
 import com.amshulman.insight.action.BlockAction;
 import com.amshulman.insight.action.ItemAction;
@@ -14,11 +16,12 @@ import com.amshulman.insight.query.QueryParameters;
 import com.amshulman.insight.types.InsightLocation;
 
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public abstract class InsightResultSet implements Iterable<InsightRecord<?>> {
 
-    private InsightRecord<?> previous = null;
-    private final List<InsightRecord<?>> records;
-    @Getter private final QueryParameters queryParameters;
+    @NonFinal InsightRecord<?> previous = null;
+    List<InsightRecord<?>> records;
+    @Getter QueryParameters queryParameters;
 
     protected InsightResultSet(QueryParameters params) {
         records = new ArrayList<InsightRecord<?>>();
@@ -38,7 +41,7 @@ public abstract class InsightResultSet implements Iterable<InsightRecord<?>> {
         previous = null;
     }
 
-    public InsightRecord<?> getRecord(int index) {
+    public final InsightRecord<?> getRecord(int index) {
         return records.get(index);
     }
 
@@ -48,11 +51,11 @@ public abstract class InsightResultSet implements Iterable<InsightRecord<?>> {
         return records.subList(fromIndex, toIndex);
     }
 
-    public int getSize() {
+    public final int getSize() {
         return records.size();
     }
 
-    public Iterator<InsightRecord<?>> iterator() {
+    public final Iterator<InsightRecord<?>> iterator() {
         return records.iterator();
     }
 

@@ -10,12 +10,15 @@ import com.amshulman.insight.results.InsightRecord;
 @Value
 @RequiredArgsConstructor
 @EqualsAndHashCode(of = { "name" }, callSuper = false)
-public class ItemActionImpl extends ItemAction {
+public final class ItemActionImpl extends ItemAction {
 
     String name;
     String friendlyDescription;
     ItemRollbackAction rollbackAction;
 
+    /**
+     * Insert the item described in the action
+     */
     public static final ItemRollbackAction INSERT = new ItemRollbackAction() {
 
         @Override
@@ -24,6 +27,9 @@ public class ItemActionImpl extends ItemAction {
         }
     };
 
+    /**
+     * Withdraw the item described in the action
+     */
     public static final ItemRollbackAction WITHDRAW = new ItemRollbackAction() {
 
         @Override
@@ -32,6 +38,9 @@ public class ItemActionImpl extends ItemAction {
         }
     };
 
+    /**
+     * Do nothing
+     */
     public static final ItemRollbackAction NOTHING = new ItemRollbackAction() {
 
         @Override

@@ -12,11 +12,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 import com.amshulman.insight.playerheads.PlayerHeadsBridge;
 
 @Value
-public class SkullMeta implements MetadataEntry {
+public final class SkullMeta implements MetadataEntry {
 
     private static final long serialVersionUID = -3025864226932077542L;
 
-    private transient static final boolean playerHeads;
+    transient static boolean playerHeads;
 
     BlockFace rotation;
     SkullType type;

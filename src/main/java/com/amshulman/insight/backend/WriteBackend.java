@@ -6,13 +6,37 @@ import com.amshulman.insight.row.RowEntry;
 
 public interface WriteBackend extends AutoCloseable {
 
-    public abstract void registerPlayer(String playerName, UUID uuid);
-    
-    public abstract void registerWorld(String worldName);
+    /**
+     * Add a player with the specified name and UUID to the database. This should be called before writing any actions for this player.
+     *
+     * @param playerName
+     *            The player's name
+     * @param uuid
+     *            The player's UUID
+     */
+    public void registerPlayer(String playerName, UUID uuid);
 
-    public abstract void submit(RowEntry data);
+    /**
+     * Add a world with the specified name to the database. This should be called before writing any actions for this world.
+     *
+     * @param worldName
+     *            The name of the world
+     */
+    public void registerWorld(String worldName);
 
-    public abstract void suggestFlush();
+    /**
+     * Schedule this data to be written to the backing store at a future time.
+     *
+     * @param data
+     *            The information to log
+     */
+    public void submit(RowEntry data);
 
-    public abstract void close();
+    /**
+     * Suggest that the database flush its row cache to ensure capacity for multiple rows. This is only a hint and may be ignored.
+     */
+    public void suggestFlush();
+
+    @Override
+    public void close();
 }

@@ -18,7 +18,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class EventRegistry {
+public final class EventRegistry {
 
     static Multimap<String, InsightAction> actionsByName = HashMultimap.create();
 
