@@ -41,7 +41,7 @@
 	</distributionManagement>
 
 	<properties>
-		<playerheads.version>3.8</playerheads.version>
+		<playerheads.version>3.10</playerheads.version>
 	</properties>
 
 	<dependencies>
