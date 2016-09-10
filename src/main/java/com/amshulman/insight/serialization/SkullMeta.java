@@ -7,7 +7,6 @@ import org.bukkit.SkullType;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Skull;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import com.amshulman.insight.playerheads.PlayerHeadsBridge;
 
@@ -42,24 +41,6 @@ public final class SkullMeta implements MetadataEntry {
             owner = null;
             displayName = null;
         }
-    }
-
-    public SkullMeta(Skull skull, ItemMeta itemMeta) {
-        rotation = skull.getRotation();
-
-        if (itemMeta instanceof org.bukkit.inventory.meta.SkullMeta) {
-            org.bukkit.inventory.meta.SkullMeta meta = (org.bukkit.inventory.meta.SkullMeta) itemMeta;
-            if (meta.hasOwner()) {
-                type = SkullType.PLAYER;
-                owner = meta.getOwner();
-                displayName = meta.hasDisplayName() ? meta.getDisplayName() : null;
-                return;
-            }
-        }
-
-        type = skull.getSkullType();
-        owner = null;
-        displayName = null;
     }
 
     public ItemStack getItemStack() {
