@@ -32,7 +32,7 @@ public final class SkullMeta implements MetadataEntry {
         type = skull.getSkullType();
 
         if (skull.hasOwner()) {
-            owner = skull.getOwner();
+            owner = skull.getOwningPlayer().getName();
             if (playerHeads) {
                 displayName = PlayerHeadsBridge.getDisplayName(owner);
             } else {
@@ -58,7 +58,7 @@ public final class SkullMeta implements MetadataEntry {
         }
 
         type = skull.getSkullType();
-        owner = skull.getOwner();
+        owner = null;
         displayName = null;
     }
 
