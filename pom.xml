@@ -40,10 +40,6 @@
 		</snapshotRepository>
 	</distributionManagement>
 
-	<properties>
-		<playerheads.version>3.10</playerheads.version>
-	</properties>
-
 	<dependencies>
 		<!-- Insight libraries -->
 		<dependency>
@@ -61,20 +57,6 @@
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
-		</dependency>
-
-		<!-- PlayerHeads -->
-		<dependency>
-			<groupId>org.shininet.bukkit</groupId>
-			<artifactId>PlayerHeads</artifactId>
-			<version>${playerheads.version}</version>
-			<scope>provided</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
 		<!-- Bukkit -->
