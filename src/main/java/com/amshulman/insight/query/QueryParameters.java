@@ -1,6 +1,6 @@
 package com.amshulman.insight.query;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import lombok.Value;
@@ -36,6 +36,6 @@ public final class QueryParameters {
     int radius;
     InsightLocation point;
 
-    Date after;
-    Date before;
+    LocalDateTime after;
+    LocalDateTime before;
 }

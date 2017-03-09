@@ -1,6 +1,6 @@
 package com.amshulman.insight.query;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -37,8 +37,8 @@ public final class QueryParameterBuilder {
     int radius = 0;
     InsightLocation point = null;
 
-    Date after;
-    Date before;
+    LocalDateTime after;
+    LocalDateTime before;
 
     boolean built = false;
 
@@ -179,22 +179,22 @@ public final class QueryParameterBuilder {
         return this;
     }
 
-    public QueryParameterBuilder setAfter(Date date) {
+    public QueryParameterBuilder setAfter(LocalDateTime date) {
         assert (!built);
 
         if (date != null && before != null) {
-            assert (date.before(before));
+            assert (date.isBefore(before));
         }
 
         after = date;
         return this;
     }
 
-    public QueryParameterBuilder setBefore(Date date) {
+    public QueryParameterBuilder setBefore(LocalDateTime date) {
         assert (!built);
 
         if (date != null && after != null) {
-            assert (date.after(after));
+            assert (date.isAfter(after));
         }
 
         before = date;
